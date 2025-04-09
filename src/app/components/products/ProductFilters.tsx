@@ -84,7 +84,7 @@ const ProductFilters = ({
 
                 {/* Category Filter */}
                 <select
-                    id="category-filter"
+                    aria-label="Filter by category"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all sr-only">
@@ -95,9 +95,6 @@ const ProductFilters = ({
                         </option>
                     ))}
                 </select>
-                <label htmlFor="category-range" className="sr-only">
-                    Category Filter
-                </label>
 
                 {/* Price Range Filter */}
                 <div className="space-y-2">
