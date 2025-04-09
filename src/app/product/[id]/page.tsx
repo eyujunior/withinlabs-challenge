@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import Button from "@/app/components/ui/Button";
+import BackButton from "@/app/components/ui/BackButton";
 import Rating from "@/app/components/ui/Rating";
 import ReviewCard from "@/app/components/ui/ReviewCard";
 import { Product, Review } from "@/app/types/product";
-import Link from "next/link";
+import { AddToCart } from "@/app/components/AddToCart";
 
 async function getProduct(id: string): Promise<{
     product: Product;
@@ -12,7 +12,7 @@ async function getProduct(id: string): Promise<{
 }> {
     const res = await Promise.all([
         fetch(`https://dummyjson.com/products/${id}`),
-        fetch(`https://dummyjson.com/comments/post/${id}`), // Using posts as example reviews
+        fetch(`https://dummyjson.com/comments/post/${id}`),
     ]);
 
     if (!res[0].ok) throw new Error("Failed to fetch product");
@@ -25,6 +25,7 @@ async function getProduct(id: string): Promise<{
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
     let data;
+
     try {
         data = await getProduct(params.id);
     } catch (error) {
@@ -34,28 +35,11 @@ export default async function ProductPage({ params }: { params: { id: string } }
     const { product, reviews } = data;
 
     return (
-        <div className="bg-white">
+        <div className="bg-[#fafaf4]">
             <div className="container mx-auto px-4 py-8">
                 {/* Back button */}
-                <Button variant="ghost" className="mb-4" asChild>
-                    <Link href="/" className="flex items-center text-blue-500 gap-2">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            className="w-4 h-4">
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-                            />
-                        </svg>
-                        Back to Products
-                    </Link>
-                </Button>
-
+                <BackButton/>
+                    
                 {/* Product Grid */}
                 <div className="grid md:grid-cols-2 gap-8">
                     {/* Image Gallery */}
@@ -128,9 +112,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
                             </ul>
                         </div>
 
-                        <div className="flex space-x-4 mb-8">
-                            <Button className="flex-1">Add to Cart</Button>
-                        </div>
+                        <AddToCart product={product} />
                     </div>
                 </div>
 

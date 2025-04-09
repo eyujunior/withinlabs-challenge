@@ -4,7 +4,7 @@ interface ReviewCardProps {
     review: Review;
 }
 
-export default function ReviewCard({ review }: ReviewCardProps) {
+const ReviewCard = ({ review }: ReviewCardProps) => {
     return (
         <div className="border-b pb-6 last:border-b-0 last:pb-0">
             <div className="flex items-start gap-4">
@@ -31,4 +31,6 @@ export default function ReviewCard({ review }: ReviewCardProps) {
             </div>
         </div>
     );
-}
+};
+
+export default ReviewCard;
