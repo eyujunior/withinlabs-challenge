@@ -2,10 +2,19 @@
 
 A high-performance Next.js e-commerce application featuring product listings, search/filtering, and cart management. Achieved perfect Lighthouse scores across all metrics.
 
+## Mobile
+
+![image](https://github.com/user-attachments/assets/fbdbb522-7bb8-4b56-be07-be1ca48cf506)
+
+## Desktop
+
+![image](https://github.com/user-attachments/assets/978cb25e-4467-49c8-9e61-d30e802cc625)
+
+
+
 ## 🔗 Deployment
 
 -   **Live Demo**: [Vercel Deployment](https://withinlabs-challenge.vercel.app/)
--   **Source Code**: [GitHub Repository](https://github.com/eyujunior/withinlabs-challenge/)
 
 ## Architecture Decisions
 
