@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# E-Commerce Product Catalog
 
-## Getting Started
+A high-performance Next.js e-commerce application featuring product listings, search/filtering, and cart management. Achieved perfect Lighthouse scores across all metrics.
 
-First, run the development server:
+## 🔗 Deployment
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+-   **Live Demo**: [Vercel Deployment](https://withinlabs-challenge.vercel.app/)
+-   **Source Code**: [GitHub Repository](https://github.com/eyujunior/withinlabs-challenge/)
+
+## Architecture Decisions
+
+### Framework Choices
+
+-   **Next.js (App Router)**:
+    -   Used the new App Router (instead of Pages Router) as it's the recommended approach for:
+        -   Improved file-based routing with nested layouts
+        -   Built-in React Server Components support
+        -   Better data fetching patterns
+        -   Streaming and Suspense support
+-   **Tailwind CSS**: For rapid UI development with utility-first styling
+-   **Zustand**: Lightweight state management for client-side cart state
+
+### Performance Excellence
+
+-   **Perfect Lighthouse Scores (100%)**:
+    -   Performance
+    -   Accessibility
+    -   Best Practices
+    -   SEO
+-   Optimized through:
+    -   Server-side rendering for critical pages
+    -   Efficient image loading
+    -   Minimal client-side JavaScript
+
+## Testing Approach
+
+**Planned Test Implementation** (Future Scope):
+
+-   Unit tests for components using Jest + React Testing Library
+-   State management tests for cart operations
+
+_Note: Testing infrastructure would be implemented given additional development time_
+
+## Dependencies
+
+```json
+"dependencies": {
+  "next": "^14",
+  "react": "^18",
+  "react-dom": "^18",
+  "zustand": "^4",
+  "react-toastify": "^9",
+  "tailwindcss": "^3"
+}
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
