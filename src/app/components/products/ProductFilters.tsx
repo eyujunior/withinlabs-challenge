@@ -84,6 +84,7 @@ const ProductFilters = ({
 
                 {/* Category Filter */}
                 <select
+                    id="category-filter"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
@@ -94,6 +95,9 @@ const ProductFilters = ({
                         </option>
                     ))}
                 </select>
+                <label htmlFor="category-range" className="sr-only">
+                    Category Filter
+                </label>
 
                 {/* Price Range Filter */}
                 <div className="space-y-2">
@@ -101,20 +105,40 @@ const ProductFilters = ({
                         Price Range: ${priceRange.min} - ${priceRange.max}
                     </label>
                     <div className="flex gap-4 items-center">
+                        <label htmlFor="min-range" className="sr-only">
+                            Min
+                        </label>
+                        <label htmlFor="max-range" className="sr-only">
+                            Max
+                        </label>
                         <input
+                            id="min-range"
                             type="range"
                             min="0"
-                            max="1000"
+                            max={priceRange.max}
                             value={priceRange.min}
-                            onChange={(e) => setPriceRange((prev) => ({ ...prev, min: Number(e.target.value) }))}
+                            onChange={(e) => {
+                                const newMin = Number(e.target.value);
+                                setPriceRange((prev) => ({
+                                    min: newMin,
+                                    max: newMin > prev.max ? newMin : prev.max, // Ensure max is always >= min
+                                }));
+                            }}
                             className="w-full"
                         />
                         <input
+                            id="max-range"
                             type="range"
-                            min="0"
+                            min={priceRange.min}
                             max="1000"
                             value={priceRange.max}
-                            onChange={(e) => setPriceRange((prev) => ({ ...prev, max: Number(e.target.value) }))}
+                            onChange={(e) => {
+                                const newMax = Number(e.target.value);
+                                setPriceRange((prev) => ({
+                                    min: newMax < prev.min ? newMax : prev.min, // Ensure min is always <= max
+                                    max: newMax,
+                                }));
+                            }}
                             className="w-full"
                         />
                     </div>
