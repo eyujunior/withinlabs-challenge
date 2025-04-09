@@ -35,6 +35,7 @@ export function Cart() {
     return (
         <div className="relative">
             <button
+                aria-label="Open Cart"
                 onClick={() => setIsOpen(true)}
                 className="relative p-2 rounded-full hover:bg-gray-100 cursor-pointer">
                 <svg
