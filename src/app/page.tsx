@@ -8,11 +8,7 @@ async function getCategories(): Promise<string[]> {
     return res.json();
 }
 
-export default async function ProductsPage({
-    searchParams,
-}: {
-    searchParams: any;
-}) {
+export default async function ProductsPage({ searchParams }: { searchParams: any }) {
     const params = await searchParams;
     const page = params.page ? parseInt(params.page as string) : 1;
     const category = (params.category as string) || "";
@@ -30,7 +26,7 @@ export default async function ProductsPage({
     const categories = await getCategories();
 
     return (
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 min-h-[70vh]">
             <h1 className="text-3xl font-bold text-gray-900 mb-8">Featured Products</h1>
             <ProductFilters products={products} categories={categories} initialPage={page} initialCategory={category} />
         </div>
