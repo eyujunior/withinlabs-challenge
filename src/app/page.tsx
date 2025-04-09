@@ -25,7 +25,6 @@ export default async function ProductsPage({
         productsData = cache.get(cacheKey);
     } else {
         // Fetch from API if not in cache
-        console.log(`Fetching products for page ${page} from API...`);
         productsData = await getProducts(page, limit);
         cache.set(cacheKey, productsData); // Store in cache
     }
