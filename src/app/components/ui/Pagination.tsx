@@ -1,4 +1,7 @@
-// components/Pagination.tsx
+// components/ui/Pagination.tsx
+"use client";
+
+import { useSearchParams, usePathname } from "next/navigation";
 import Link from "next/link";
 
 interface PaginationProps {
@@ -8,33 +11,47 @@ interface PaginationProps {
 }
 
 export default function Pagination({ currentPage, totalPages, basePath }: PaginationProps) {
-    const maxVisiblePages = 5;
-    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
 
-    if (endPage - startPage + 1 < maxVisiblePages) {
-        startPage = Math.max(1, endPage - maxVisiblePages + 1);
-    }
+    // Helper function to build page URLs with all existing search params
+    const getPageUrl = (page: number) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set("page", page.toString());
+        return `${pathname}?${params.toString()}`;
+    };
 
-    const pages = [];
-    for (let i = startPage; i <= endPage; i++) {
-        pages.push(i);
-    }
+    const getPageNumbers = () => {
+        const pages = [];
+        const maxVisible = 5;
+        let start = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+        let end = Math.min(totalPages, start + maxVisible - 1);
+
+        if (end - start + 1 < maxVisible) {
+            start = Math.max(1, end - maxVisible + 1);
+        }
+
+        for (let i = start; i <= end; i++) {
+            pages.push(i);
+        }
+
+        return pages;
+    };
 
     return (
-        <nav className="flex items-center justify-center space-x-2">
+        <nav className="flex items-center justify-center space-x-2 mt-8">
             {currentPage > 1 && (
                 <Link
-                    href={`${basePath}?page=${currentPage - 1}`}
+                    href={getPageUrl(currentPage - 1)}
                     className="px-3 py-1 rounded border border-gray-300 hover:bg-gray-100">
                     Previous
                 </Link>
             )}
 
-            {startPage > 1 && (
+            {getPageNumbers()[0] > 1 && (
                 <>
                     <Link
-                        href={`${basePath}?page=1`}
+                        href={getPageUrl(1)}
                         className={`px-3 py-1 rounded border ${
                             1 === currentPage
                                 ? "bg-blue-500 text-white border-blue-500"
@@ -42,14 +59,14 @@ export default function Pagination({ currentPage, totalPages, basePath }: Pagina
                         }`}>
                         1
                     </Link>
-                    {startPage > 2 && <span className="px-2">...</span>}
+                    {getPageNumbers()[0] > 2 && <span className="px-2">...</span>}
                 </>
             )}
 
-            {pages.map((page) => (
+            {getPageNumbers().map((page) => (
                 <Link
                     key={page}
-                    href={`${basePath}?page=${page}`}
+                    href={getPageUrl(page)}
                     className={`px-3 py-1 rounded border ${
                         page === currentPage
                             ? "bg-blue-500 text-white border-blue-500"
@@ -59,11 +76,11 @@ export default function Pagination({ currentPage, totalPages, basePath }: Pagina
                 </Link>
             ))}
 
-            {endPage < totalPages && (
+            {getPageNumbers().slice(-1)[0] < totalPages && (
                 <>
-                    {endPage < totalPages - 1 && <span className="px-2">...</span>}
+                    {getPageNumbers().slice(-1)[0] < totalPages - 1 && <span className="px-2">...</span>}
                     <Link
-                        href={`${basePath}?page=${totalPages}`}
+                        href={getPageUrl(totalPages)}
                         className={`px-3 py-1 rounded border ${
                             totalPages === currentPage
                                 ? "bg-blue-500 text-white border-blue-500"
@@ -76,7 +93,7 @@ export default function Pagination({ currentPage, totalPages, basePath }: Pagina
 
             {currentPage < totalPages && (
                 <Link
-                    href={`${basePath}?page=${currentPage + 1}`}
+                    href={getPageUrl(currentPage + 1)}
                     className="px-3 py-1 rounded border border-gray-300 hover:bg-gray-100">
                     Next
                 </Link>

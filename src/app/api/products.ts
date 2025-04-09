@@ -2,9 +2,9 @@ import { ProductsResponse } from "@/app/types/product";
 
 const API_URL = "https://dummyjson.com/products";
 
-export async function getProducts(page: number = 1, limit: number = 10): Promise<ProductsResponse> {
+export async function getProducts(page: number = 1, limit: number = 10, categories: string = ''): Promise<ProductsResponse> {
     const skip = (page - 1) * limit;
-    const res = await fetch(`${API_URL}?limit=${limit}&skip=${skip}`);
+    const res = await fetch(`${API_URL}/categories/${categories}?limit=${limit}&skip=${skip}`);
     if (!res.ok) {
         throw new Error("Failed to fetch products");
     }
