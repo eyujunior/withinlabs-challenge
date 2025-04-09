@@ -23,7 +23,8 @@ async function getProduct(id: string): Promise<{
     };
 }
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
+export default async function ProductPage(props: { params: Promise<{ id: string }> }) {
+    const params = await props.params;
     let data;
 
     try {

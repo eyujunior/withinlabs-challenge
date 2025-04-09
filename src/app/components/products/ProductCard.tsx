@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 interface ProductCardProps {
     title: string;
     price: number;
@@ -11,7 +12,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ title, price, thumbnail, tags, id }) => {
     return (
         <Link href={`/product/${id}`} className="rounded-md overflow-hidden shadow-xl shadow-gray-100 p-4 bg-white">
-            <img className="w-full object-cover" src={thumbnail} alt={title} />
+            <Image className="w-full object-cover" src={thumbnail} alt={title} />
             <div className="mt-4">
                 <h2 className="font-semibold text-gray-800">{title}</h2>
                 <p className="text-gray-600 mt-1">${price.toFixed(2)}</p>

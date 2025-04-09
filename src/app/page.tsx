@@ -5,11 +5,7 @@ import { Product } from "@/app/types/product";
 
 const cache = new Map();
 
-export default async function ProductsPage({
-    searchParams,
-}: {
-    searchParams: { [key: string]: string | string[] | undefined };
-}) {
+export default async function ProductsPage({ searchParams }: { searchParams: any }) {
     // Await searchParams to access its properties
     const params = await searchParams;
     const page = params.page ? parseInt(params.page as string) : 1;
